@@ -2,14 +2,11 @@
 # vi-mode colour changing
 #   http://www.zsh.org/mla/users/2006/msg01196.html
 
+export ZSH_THEME_GIT_PROMPT_PREFIX=''
+export ZSH_THEME_GIT_PROMPT_SUFFIX=''
+
 rst="%{%b%s%u$reset_color%}"
 bgc="%{%(?.$rst.%S)%}"
-
-function rbenv_prompt_info() {
-  local ruby_version
-  ruby_version=$(rbenv version 2> /dev/null) || return
-  echo "$ruby_version" | sed 's/[ \t].*$//'
-}
 
 function lprompt {
     local col1 col2 ch1 ch2
@@ -37,16 +34,10 @@ $col2\$$rst "
 
 function _rprompt_dir {
     local col_b col_s
-    git_p=${$(git_prompt_info '%p')%% }
     col_p="%{$fg[yellow]%}"
 
     local short
     short="${PWD/$HOME/~}"
-
-    if test -z "$git_p" ; then
-            echo -n "$short"
-            return
-    fi
 
     local lead rest
     lead=$git_p
@@ -63,7 +54,7 @@ function rprompt {
     ch2=$col1${1[2]}
     col_git="%{$fg[green]%}"
     col_ruby="%{$fg[blue]%}"
-    git_b='$(git_prompt_info '%b' )'
+    git_b='$(git_prompt_info '%b' ) '
     ruby_b='$(rbenv_prompt_info '%b' ) '
 
     local _dir='$(_rprompt_dir)'
@@ -73,8 +64,8 @@ function rprompt {
     RPROMPT="\
 $rst$ch1\
 $col1$screen_s\
-$col_git$git_b\
 $col_ruby$ruby_b\
+$col_git$git_b\
 $col2%n@%m\
 $col1:\
 $col2%B$_dir%b\
