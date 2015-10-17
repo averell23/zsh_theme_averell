@@ -3,7 +3,7 @@
 #   http://www.zsh.org/mla/users/2006/msg01196.html
 
 export ZSH_THEME_GIT_PROMPT_PREFIX=''
-export ZSH_THEME_GIT_PROMPT_SUFFIX=''
+export ZSH_THEME_GIT_PROMPT_SUFFIX=' '
 
 rst="%{%b%s%u$reset_color%}"
 bgc="%{%(?.$rst.%S)%}"
@@ -54,7 +54,7 @@ function rprompt {
     ch2=$col1${1[2]}
     col_git="%{$fg[green]%}"
     col_ruby="%{$fg[blue]%}"
-    git_b='$(git_prompt_info '%b' ) '
+    git_b='$(git_prompt_info '%b' )'
     ruby_b='$(rbenv_prompt_info '%b' ) '
 
     local _dir='$(_rprompt_dir)'
