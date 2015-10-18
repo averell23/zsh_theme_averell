@@ -5,9 +5,6 @@
 export ZSH_THEME_GIT_PROMPT_PREFIX='\ue0a0 '
 export ZSH_THEME_GIT_PROMPT_SUFFIX=' '
 
-# Color changing
-# %K{color} sets background color
-# %F{color} sets foreground color
 rst="%{%K{default}%F{default}%}"
 
 # Usage:
@@ -49,13 +46,22 @@ $(power_lsegment "$user_string" white $1 default)\
 "
 }
 
+function ruby_version {
+  ruby_b="$(rbenv_prompt_info '%b')"
+  if [[ -z $ruby_b ]] ; then
+    echo 'no ruby'
+  else
+    echo $ruby_b
+  fi
+}
+
 function rprompt {
   git_b='$(git_segment)'
-  ruby_b='$(rbenv_prompt_info '%b' )'
+  ruby_b='$(ruby_version)'
 
   RPROMPT="\
-$(power_rsegment '${PWD/$HOME/~}' white 57 default)\
-$(power_rsegment "$ruby_b" white blue 57)\
+$(power_rsegment '${PWD/$HOME/~}' white 97 default)\
+$(power_rsegment "$ruby_b" white blue 97)\
 $git_b"
 }
 
@@ -63,10 +69,10 @@ if [ $UID -eq 0 ]; then
     lprompt red '*'
     rprompt
 elif [ "$TERM" = "screen" ]; then
-    lprompt green 'S'
+    lprompt '' green blue
     rprompt
 elif [ -n "$SSH_TTY" ]; then
-    lprompt cyan
+    lprompt '' cyan blue
     rprompt
 else
     lprompt blue
