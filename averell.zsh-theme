@@ -73,6 +73,7 @@ elif [ "$TERM" = "screen" ]; then
     rprompt
 elif [ -v TMUX ]; then
     lprompt cyan "[tmux]"
+    rprompt
 elif [ -n "$SSH_TTY" ]; then
     lprompt magenta
     rprompt
