@@ -69,10 +69,12 @@ if [ $UID -eq 0 ]; then
     lprompt red '*'
     rprompt
 elif [ "$TERM" = "screen" ]; then
-    lprompt '' green blue
+    lprompt cyan "[screen]"
     rprompt
+elif [ -v TMUX ]; then
+    lprompt cyan "[tmux]"
 elif [ -n "$SSH_TTY" ]; then
-    lprompt '' cyan blue
+    lprompt magenta
     rprompt
 else
     lprompt blue
