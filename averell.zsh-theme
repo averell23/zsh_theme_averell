@@ -22,7 +22,7 @@ function power_rsegment {
 function git_segment {
   git_prompt="$(git_prompt_info)"
   if [[ -n $git_prompt ]] ; then
-    power_rsegment "$git_prompt" white 97 blue
+    power_rsegment "$git_prompt" white blue 97
   else
     echo ''
   fi
