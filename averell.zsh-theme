@@ -46,22 +46,11 @@ $(power_lsegment "$user_string" white $1 default)\
 "
 }
 
-function ruby_version {
-  ruby_b="$(rbenv_prompt_info '%b')"
-  if [[ -z $ruby_b ]] ; then
-    echo 'no ruby'
-  else
-    echo $ruby_b
-  fi
-}
-
 function rprompt {
   git_b='$(git_segment)'
-  ruby_b='$(ruby_version)'
 
   RPROMPT="\
 $(power_rsegment '${PWD/$HOME/~}' white 97 default)\
-$(power_rsegment "$ruby_b" white blue 97)\
 $git_b"
 }
 
